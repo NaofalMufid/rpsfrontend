@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Rock Paper Scissors</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body style="background-color: #9C835F;">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand navbar-light bg-faded">
+          <a class="navbar-brand" href="#"><img src="assets/back.png" alt=""></a>
+          <a class="navbar-brand" href="#"><img src="assets/logo.png" alt=""></a>
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+                <p class="text-uppercase nav-title">Rock Paper Scissors</p>
+            </li>
+          </ul>
+      </nav>
+      <!-- Content -->
+      <div class="container">
+          <div class="row pr-5 pl-5 text-center">
+                <!-- Player -->
+                <div class="col-md-4 player">
+                    <h4 id="playerSelect">Player</h4>
+                    <button type="button" class="btn btn-game">
+                        <img src="assets/batu.png" class="img-game" value="rock">
+                    </button>
+                    <br>
+                    <button type="button" class="btn btn-game">
+                        <img src="assets/kertas.png" class="img-game" value="paper">
+                    </button>
+                    <br>
+                    <button type="button" class="btn btn-game">
+                        <img src="assets/gunting.png" class="img-game" value="scissors">
+                    </button>
+                </div>
+                <!-- Result -->
+                <div class="col-md-4">
+                    <div class="result">
+                        VS
+                    </div>
+                </div>
+                <!-- Player -->
+                <div class="col-md-4 computer">
+                    <h4 id="comSelect">Com</h4>
+                        <img src="assets/batu.png" id="img-game-com" class="img-game pt-3" value="rock">
+                    <br>
+                        <img src="assets/kertas.png" id="img-game-com" class="img-game pt-3" value="paper">
+                    <br>
+                        <img src="assets/gunting.png" id="img-game-com" class="img-game pt-3" value="scissors">
+                </div>
+          </div>
+          <div class="row score pr-5 pl-5 text-center">
+            <div class="col-md-4">
+                <h3 class="player-score">0</h3>
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-refresh" onclick="window.location.reload();"><img src="assets/refresh.png" class="img-refresh" alt=""></button>
+            </div>
+            <div class="col-md-4">
+                <h3 class="com-score">0</h3>
+            </div>
+          </div>
+      </div>
+
+    <!-- Optional JavaScript -->
+    <script src="game.js"></script>
+  </body>
+</html>
