@@ -52,13 +52,19 @@
     }
 
 
+
+
+
     // whoIsTheWinner game
     function theWinnerIs(player, com) {
         console.log('player selected '+player)
         console.log('com selected '+com)
         document.getElementById("playerSelect").innerHTML = "Player selected "+player
         document.getElementById("comSelect").innerHTML = "Com selected "+com
-    
+    	
+        // show computer selected
+        
+
         if (player === com) {
             return 'Draw';
         }
