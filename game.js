@@ -18,6 +18,7 @@
         let playerSelected = e.target.getAttribute('value');
         // run random for compute select hand image
         let comSelected = Math.floor(Math.random() * comOptions.length);
+        
         // winner game
         let result = theWinnerIs(playerSelected, comOptions[comSelected]); 
 
@@ -51,18 +52,24 @@
         message.innerHTML = selectMsg;
     }
 
-
-
-
-
     // whoIsTheWinner game
     function theWinnerIs(player, com) {
         console.log('player selected '+player)
         console.log('com selected '+com)
-        document.getElementById("playerSelect").innerHTML = "Player selected "+player
-        document.getElementById("comSelect").innerHTML = "Com selected "+com
-    	
+        // document.getElementById("playerSelect").innerHTML = "Player selected "+player
+        // document.getElementById("comSelect").innerHTML = "Com selected "+com
+        
+        let com_img_selected = document.getElementById("img-game-com").getAttribute('value')  
+        console.log('com pilih ',com_img_selected)
+        
         // show computer selected
+        if (com === "paper") {
+            document.getElementById("img-game-com").style.background = "#C4C4C4"
+        }else if(com === "rock"){
+            document.getElementById("img-game-com").style.background = "#C4C4C4"
+        }else if(com === "scissors"){
+            document.getElementById("img-game-com").style.background = "#C4C4C4"
+        }
         
 
         if (player === com) {
