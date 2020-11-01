@@ -10,13 +10,14 @@ Backend dibuat dengan :
 - nodejs X express.js
 - data assets disimpan di file json
 - gambar ditaruh di https://cloudinary.com/
-- repo backend https://gitlab.com/NaofalMufid/jankenpon-backend
+- repo backend https://github.com/NaofalMufid/rpsbackend
 
 
 Api yang tersedia di backend sekarang :
 - get all assets -> http://localhost:2020/api/assets
 - get asset detail -> http://localhost:2020/api/assets/:id
-
+- login -> http://localhost:3000/api/login
+- register -> http://localhost:3000/api/regsiter
 Frontend :
 - javascript dengan XMLHttpRequest
 frontend jalankan di vscode dengan liveserver
