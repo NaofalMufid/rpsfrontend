@@ -14,7 +14,7 @@ $("#user-form").submit(function() {
         },
         success: function(d) {
             console.log(d)
-            window.open("login.html", "_self")
+            window.location.href("login.html")
         }
     })
 })
