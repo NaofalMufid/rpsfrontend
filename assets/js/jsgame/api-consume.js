@@ -2,7 +2,7 @@
 var request = new XMLHttpRequest()
 
 // membua koneksi baru, menggunakana GET request di URL endpoint
-request.open('GET', 'http://localhost:2020/api/assets', true)
+request.open('GET', 'http://localhost:8080/api/assets/', true)
 
 request.onload = function () {
   // mulai akses data JSON disini
