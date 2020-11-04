@@ -10,7 +10,7 @@ function parseJwt (token) {
     } catch {
         // error which means it's not a jwt token
         // console.log("token salah");
-        window.open("../login.html", "_self");
+        window.open("../error.html", "_self");
         return false;
     }
 }
@@ -18,12 +18,12 @@ function parseJwt (token) {
 // function to check token
 if (localStorage.getItem('userToken') === null) {
     // console.log("sebelum main login dulu ya jon");
-    window.open("../login.html", "_self");
+    window.open("../error.html", "_self");
 } else {
     const decoded = parseJwt(localStorage.getItem('userToken'));
     const currentTimestamp = Math.floor(Date.now()/1000);
     if (decoded.exp < currentTimestamp) {
         // console.log("sebelum main login dulu");
-        window.open("../login.html", "_self");
+        window.open("../error.html", "_self");
     }
 }

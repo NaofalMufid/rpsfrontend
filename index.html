@@ -38,13 +38,13 @@
           </ul>
           <ul class="navbar-nav my-2 my-lg-0">
             <li class="nav-item">
-              <a class="nav-link text-uppercase" href="register.html">Register <span class="sr-only">(current)</span></a>
+              <a class="nav-link text-uppercase" id="register" href="register.html">Register <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-uppercase" href="login.html">Login <span class="sr-only">(current)</span></a>
+              <a class="nav-link text-uppercase" id="login" href="login.html">Login <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-uppercase" href="#" id="logout">Logout <span class="sr-only">(current)</span></a>
+              <a class="nav-link text-uppercase" id="logout" href="#" style="display:none;" id="logout">Logout <span class="sr-only">(current)</span></a>
             </li>
           </ul>
         </div>
@@ -335,5 +335,16 @@
     <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/auth/logout.js"></script>
+    <script>
+      // hide logout link when user token null
+      if (localStorage.getItem('userToken') === null) {
+        $('#logout').hide();
+      // show logout link and hide register login link when user token null  
+      }else{
+        $('#register').hide();
+        $('#login').hide();
+        $('#logout').show();
+      }
+    </script>
   </body>
 </html>

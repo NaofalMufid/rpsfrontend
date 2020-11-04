@@ -8,15 +8,15 @@ Backend dibuat dengan :
 - gambar ditaruh di https://cloudinary.com/
 - repo backend https://github.com/NaofalMufid/rpsbackend
 
-
-Api yang tersedia di backend sekarang :
-- get all assets -> http://localhost:3000/api/assets
-- get asset detail -> http://localhost:300/api/assets/:id
-- login -> http://localhost:3000/api/login
-- register -> http://localhost:3000/api/regsiter
+API yang tersedia di backend sekarang :
+- get all assets -> http://localhost:8080/api/assets
+- get asset detail -> http://localhost:8080/api/assets/:id
+- login -> http://localhost:8080/api/login
+- register -> http://localhost:8080/api/regsiter
 
 Frontend :
 - javascript dengan XMLHttpRequest
 - login : login.html
 - register : register.html
+
 *** frontend jalankan di vscode dengan liveserver ***
