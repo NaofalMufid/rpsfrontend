@@ -1,44 +1,107 @@
-// import logo from './logo.svg';
-// import './App.css';
-import React, {useEffect, Fragment} from "react"
-import AOS from "aos"
-import $ from "jquery"
+import React, {Component} from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import './App.css'
+import { Header } from './components/Header'
+import { Users } from './components/Users'
+import { ResultSearch } from './components/ResultSearch'
+import { DisplayBoard } from './components/DisplayBoard'
+import { SearchUser } from './components/SearchUser'
+import CreateUser from './components/CreateUser'
+import { getAllUsers, createUser , fetchSearchUsers} from './services/UserService'
+import Modal from 'react-bootstrap/Modal'
 
-import Header from "./components/landing/Header"
-import Home from "./components/landing/Home"
-import About from "./components/landing/About"
-import Contact from "./components/landing/Contact"
+class App extends Component{
+    // onChangeSearch = this.onChangeSearchTitle.bind(this);
+    state = {
+        user: {},
+        users: [],
+        search: "",
+        results: [],
+        numberOfUsers: 0
+    }
 
-import "aos/dist/aos.css"
-import "./assets/styles/main.scss"
+    // search
+    onChangeSearchTitle = (e) => {
+      const search = e.target.value
+      this.setState({search: search})
+    }
 
-const App = () => {
-  useEffect(() => {
-    AOS.init({ once: true })
-    let navElement = $("nav")
+    createUser = (e) => {
+        createUser(this.state.user)
+        .then(response => {
+            console.log(response)
+            this.setState({numberOfUsers: this.state.numberOfUsers + 1})
+        })
+    }
+    
+    
+    getAllUsers = () => {
+      getAllUsers()
+      .then(users => {
+        console.log(users)
+        this.setState({users: users, numberOfUsers: users.length})
+      })
+    }
+    
+    onChangeForm = (e) => {
+      let user = this.state.user
+      if (e.target.name === 'username') {
+        user.username = e.target.value;
+      } else if(e.target.name === 'password'){
+        user.password = e.target.value;
+      } else if(e.target.name === 'email'){
+        user.email = e.target.value;
+      }
+      this.setState({user})
+    }
 
-    $(function() {
-      $(window).scrollTop() > navElement.innerHeight()
-      ? navElement.addClass("sticky")
-      : navElement.removeClass("sticky")
-    })
-    $(window).on("scroll", function() {
-      $(window).scrollTop() > navElement.innerHeight()
-      ? navElement.addClass("sticky")
-      : navElement.removeClass("sticky")
-    })
-  })
+    searchingUser = () => {
+      fetchSearchUsers(this.state.search)
+      .then(results => {
+          console.log(results)
+          this.setState({results: results})
+      })
+    }
 
-  return(
-    <Fragment>
-      <Header/>
-      <main>
-        <Home/>
-        <About/>
-        <Contact/>
-      </main>
-    </Fragment>
-  )
+    render(){
+        return(
+            <div className="App">
+                <Header></Header>
+                <div className="container mrgnbtm">
+                    <div className="row">
+                        <div className="col-md-8">
+                            <CreateUser
+                            user={this.state.user}
+                            onChangeForm={this.onChangeForm}
+                            createUser={this.createUser}>
+                            </CreateUser>
+                        </div>
+                        <div className="col-md-4">
+                            <DisplayBoard
+                            numberOfUsers={this.state.numberOfUsers}
+                            getAllUsers={this.getAllUsers}>
+                            </DisplayBoard>
+                            <SearchUser
+                            search={this.state.search}
+                            onChangeSearchTitle={this.onChangeSearchTitle}
+                            searchingUser={this.searchingUser}>
+                            </SearchUser>
+                        </div>
+                        <div className="col-md-4">
+                        </div>
+                    </div>
+                </div>
+                <div className="row mrgnbtm">
+                    <Users users={this.state.users}></Users>
+                </div>
+                <div className="row mrgnbtm">
+                    <ResultSearch results={this.state.results}></ResultSearch>
+                </div>
+            </div>
+        )
+    }
 }
+
+// nyobain component life cycle
 
 export default App;
