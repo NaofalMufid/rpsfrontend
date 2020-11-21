@@ -1,20 +1,25 @@
 # ROCK PAPER SCISSORS FRONTEND GAME
-This repositoreis for rpsfrontend
+This repositoreis for RPSFrontend Game
 
-Backend dibuat dengan :
-- nodejs X express X sequelize
-- authentication Passport JWT
-- data assets disimpan di db postgres
-- gambar ditaruh di https://cloudinary.com/
-- repo backend https://github.com/NaofalMufid/rpsbackend
+Backend tech framwork,db, library and more:
+- nodejs X express X sequelize x Postgres
+- authentication Passport JWT for API, Passport Local for Dashboard Admin
+- data assets saved on database postgres
+- image hosting on https://cloudinary.com/
+- repository backend https://github.com/NaofalMufid/rpsbackend
 
 Frontend :
-- React, bootstrap, reac-bootstrap
-- login : login.html
-- register : register.html
+- React, bootstrap, reac-bootstrap, axios, react-router-dom ...
+- Add, List, Show, Search and Update Player/Users
 
-API yang tersedia di backend sekarang :
-- get all assets -> http://localhost:8080/api/v1/assets
-- get asset detail -> http://localhost:8080/api/v1/assets/:id
-- login -> http://localhost:8080/api/v1/login
-- register -> http://localhost:8080/api/v1/regsiter
+Available API :
+- login -> **/api/v1/login [POST]**
+- register -> **/api/v1/regsiter [POST]**
+- whoami -> **/api/v1/whoami [GET] (login required)**
+- get all assets -> **/api/v1/assets (login required)**
+- get asset detail -> **/api/v1/assets/:id (login required)**
+- show all players -> **/api/v1/players [GET]**
+- search player -> **/api/v1/searchplayer [GET]**
+- player detail -> **/api/v1/player/:id [GET]**
+- player update -> **/api/v1/player/:id [PUT]**
+
