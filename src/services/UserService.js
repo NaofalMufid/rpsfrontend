@@ -10,7 +10,7 @@ class UserDataService{
     }
     
     searchUsers(keyword) {
-        return http.get(`/players?username=${keyword}`)
+        return http.get(`/searchplayer?keyword=${keyword}`)
     }
     
     createUser(data) {
