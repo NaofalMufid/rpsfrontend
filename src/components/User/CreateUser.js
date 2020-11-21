@@ -80,6 +80,7 @@ export default class CreateUser extends Component{
                     </div>
                 ):(
                     <div>
+                        <h2>Add Player</h2>
                         <div className="form-group">
                             <label htmlFor="username">Username</label>
                             <input type="text" className="form-control" id="username" name="username" required value={this.state.username} onChange={this.onChangeUsername}/>
