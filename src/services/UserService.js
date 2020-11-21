@@ -1,18 +1,25 @@
-export async function getAllUsers() {
-    const response = await fetch('/api/v1/players')
-    return await response.json()
+import http from "./http-common"
+
+class UserDataService{
+    getAllUsers() {
+        return http.get('/players')
+    }
+
+    getOneUser(id){
+        return http.get(`/player/${id}`)
+    }
+    
+    searchUsers(keyword) {
+        return http.get(`/players?username=${keyword}`)
+    }
+    
+    createUser(data) {
+        return http.post(`/register`, data)
+    }
+
+    updateUser(id, data) {
+        return http.put(`/players/${id}`, data)
+    }
 }
 
-export async function fetchSearchUsers(keyword) {
-    const response = await fetch(`/api/v1/players?username=${keyword}`)
-    return await response.json()
-}
-
-export async function createUser(data) {
-    const response = await fetch(`/api/v1/register`, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({user: data})
-    })
-    return await response.json()
-}
+export default new UserDataService()
