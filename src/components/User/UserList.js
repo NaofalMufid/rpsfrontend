@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import UserDataService from "../../services/UserService"
+import { Button, Modal } from 'react-bootstrap' 
 import { Link } from "react-router-dom"
 
 export default class UserList extends Component{
@@ -10,17 +11,59 @@ export default class UserList extends Component{
         this.refreshList = this.refreshList.bind(this)
         this.setActiveUser = this.setActiveUser.bind(this)
         this.searchUsername = this.searchUsername.bind(this)
+        // keperluan modal edit
+        this.onChangeUsername = this.onChangeUsername.bind(this)
+        this.onChangeEmail = this.onChangeEmail.bind(this)
+        this.onChangePassword = this.onChangePassword.bind(this)
+        this.updateUser = this.updateUser.bind(this)
+        this.deleteUser = this.deleteUser.bind(this)
 
         this.state = {
             users: [],
-            currentUser: null,
+            currentUser:null,
+            currentUserEdit: {
+                username: "",
+                email: "",
+                password: ""
+            },
+            message: "",
             currentIndex: -1,
-            searchUsername: ""
+            searchUsername: "",
+            show:false,
+            setShow: false,
         }
     }
 
     componentDidMount(){
         this.retrieveUser()
+    }
+    
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.currentIndex !== this.state.currentIndex) {
+            console.log(
+                "test did update",
+                true,
+                prevState.currentIndex,
+                this.state.currentIndex,
+                prevProps
+            )
+            UserDataService.getAllUsers(this.state.users).then(
+                (response) => {
+                    this.setState({ users: response.data })
+                }
+            )
+        } else {
+            console.log('Component DID UPDATE!', false)
+        }
+    }
+
+    handleClose = () => {
+        console.log(this.state.setShow)
+        this.setState({setShow: false, show: false})
+    }
+    handleShow = () => {
+        console.log(this.state.setShow)
+        this.setState({setShow: true, show: true})
     }
 
     onChangeSeacrhUsername(e){
@@ -53,6 +96,7 @@ export default class UserList extends Component{
     setActiveUser(user, index){
         this.setState({
             currentUser: user,
+            currentUserEdit: user,
             currentIndex: index
         })
     }
@@ -70,8 +114,73 @@ export default class UserList extends Component{
         })
     }
 
+    // keperluan modal edit
+
+    onChangeUsername(e){
+        const username = e.target.value
+        this.setState(function(prevState){
+            return {
+                currentUserEdit:{
+                    ...prevState.currentUserEdit,
+                    username: username
+                }
+            }
+        })
+            
+    }
+
+    onChangeEmail(e){
+        const email = e.target.value
+        this.setState(prevState => ({
+            currentUserEdit:{
+                ...prevState.currentUserEdit,
+                email: email
+            }
+        }))
+    }
+
+    onChangePassword(e){
+        const password = e.target.value
+        this.setState(prevState => ({
+            currentUserEdit:{
+                ...prevState.currentUserEdit,
+                password: password
+            }
+        }))
+    }
+
+    updateUser(){
+        UserDataService.updateUser(
+            this.state.currentUserEdit.id,
+            this.state.currentUserEdit
+        )
+        .then(response => {
+            console.log(response.data)
+            this.setState({
+                message: "The player was updated successfully"
+            })
+            this.props.history.push('/users')
+        })
+        .catch(e => {
+            console.log(e)
+        })
+    }
+
+    deleteUser(){
+        UserDataService.deleteUser(
+            this.state.currentUserEdit.id
+        )
+        .then(response => {
+            console.log(response.data)
+            this.props.history.push('/users')
+        })
+        .catch(e => {
+            console.log(e)
+        })
+    }
+
     render(){
-        const { searchUsername, users, currentUser, currentIndex } = this.state
+        const { searchUsername, users, currentUser, currentUserEdit, currentIndex } = this.state
         return(
             <div className="list row">
                 <div className="col-md-8">
@@ -112,11 +221,58 @@ export default class UserList extends Component{
                                 </label>{" "}
                                 {currentUser.email}
                             </div>
-                            <Link to={"/users/" + currentUser.id}
-                            className="badge badge-warning">
+                            {/* <Link to={"/users/" + currentUser.id}
+                            className="badge badge-warning" onClick={this.handleShow}>
+                                Edit
+                            </Link> */}
+                            <Link className="badge badge-danger" onClick={this.deleteUser}>
+                                Delete
+                            </Link> 
+
+                            <Link className="badge badge-warning" onClick={this.handleShow}>
                                 Edit
                             </Link>
+                            <div>
+                                <Modal show={this.state.show} onHide={this.handleClose}>
+                                    <Modal.Header closeButton>
+                                    <Modal.Title>Modal heading</Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body>
+                                        {/* hanya edit doang */}
+                                        <div className="edit-form">
+                                            <h4>Edit User</h4>
+                                            <form>
+                                                <div className="form-group">
+                                                    <label htmlFor="username">Username</label>
+                                                    <input type="text" className="form-control" id="username" name="username" value={currentUserEdit.username} onChange={this.onChangeUsername}/>
+                                                </div>
+
+                                                <div className="form-group">
+                                                    <label htmlFor="email">Email</label>
+                                                    <input type="email" className="form-control" id="email" name="email" value={currentUserEdit.email} onChange={this.onChangeEmail}/>
+                                                </div>
+
+                                                <div className="form-group">
+                                                    <label htmlFor="password">Password</label>
+                                                    <input type="password" className="form-control" id="password" name="password" value={currentUserEdit.password} onChange={this.onChangePassword}/>
+                                                </div>
+                                            </form>
+
+                                            <button className="badge badge-success" onClick={this.updateUser}>Update</button>
+                                        </div>
+                                    </Modal.Body>
+                                    <Modal.Footer>
+                                    <Button variant="secondary" onClick={this.handleClose}>
+                                        Close
+                                    </Button>
+                                    <Button variant="primary" onClick={this.handleClose}>
+                                        Save Changes
+                                    </Button>
+                                    </Modal.Footer>
+                                </Modal>
+                            </div>
                         </div>
+                    
                     ) : (
                         <div>
                             <br/>

@@ -20,6 +20,10 @@ class UserDataService{
     updateUser(id, data) {
         return http.put(`/players/${id}`, data)
     }
+
+    deleteUser(id) {
+        return http.delete(`/players/${id}`)
+    }
 }
 
 export default new UserDataService()
