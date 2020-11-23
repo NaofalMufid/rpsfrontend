@@ -38,24 +38,24 @@ export default class UserList extends Component{
         this.retrieveUser()
     }
     
-    componentDidUpdate(prevProps, prevState) {
-        if (prevState.currentIndex !== this.state.currentIndex) {
-            console.log(
-                "test did update",
-                true,
-                prevState.currentIndex,
-                this.state.currentIndex,
-                prevProps
-            )
-            UserDataService.getAllUsers(this.state.users).then(
-                (response) => {
-                    this.setState({ users: response.data })
-                }
-            )
-        } else {
-            console.log('Component DID UPDATE!', false)
-        }
-    }
+    // componentDidUpdate(prevProps, prevState) {
+    //     if (prevState.currentIndex !== this.state.currentIndex) {
+    //         console.log(
+    //             "test did update",
+    //             true,
+    //             prevState.currentIndex,
+    //             this.state.currentIndex,
+    //             prevProps
+    //         )
+    //         UserDataService.getAllUsers(this.state.users).then(
+    //             (response) => {
+    //                 this.setState({ users: response.data })
+    //             }
+    //         )
+    //     } else {
+    //         console.log('Component DID UPDATE!', false)
+    //     }
+    // }
 
     handleClose = () => {
         console.log(this.state.setShow)
