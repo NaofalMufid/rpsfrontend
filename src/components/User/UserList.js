@@ -235,7 +235,7 @@ export default class UserList extends Component{
                             <div>
                                 <Modal show={this.state.show} onHide={this.handleClose}>
                                     <Modal.Header closeButton>
-                                    <Modal.Title>Modal heading</Modal.Title>
+                                    <Modal.Title>Edit User</Modal.Title>
                                     </Modal.Header>
                                     <Modal.Body>
                                         {/* hanya edit doang */}
